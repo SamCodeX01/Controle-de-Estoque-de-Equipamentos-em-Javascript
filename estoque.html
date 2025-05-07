@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de Estoque de Equipamentos</title>
+</head>
+
+<body>
+    <script>
+    const estoque = [];
+    let menu = "";
+
+    while (menu !== "4"){   
+    menu = prompt("\nDigite uma opção do menu: \n\n" +
+                        "1 - Adicionar Equipamento. \n" + 
+                        "2 - Vender Equipamento. \n" +
+                        "3 - Exibir Estoque. \n" +
+                        "4 - Sair");
+
+            if(menu === null){//Se menu for estritamente igual a nulo
+                alert("Operação cancelada. Use a opção 4 para sair.");                
+            }            
+    
+            switch(menu){
+                case "1": adicionarEquipamento();
+                    // O equipamento deve ser representado por um objeto com as propriedades "nome" e "quantidade". 
+                    // O objeto deve ser adicionado ao array de equipamentos.
+                    break;
+
+                case "2": venderEquipamento();
+                    break;
+
+                case "3": ExibirEstoque();
+                    //5) A opção "Exibir Estoque" deve percorrer o array de equipamentos e exibir o nome e a quantidade de cada equipament                  
+                     break;
+
+                case "4":
+                    alert("Programa encerrado! Até Mais!")
+                    break;    
+                    //6) O programa deve continuar em execução até que o usuário escolha a opção de sair.
+                
+                default: alert("Opção inválida! Escolha as Opções 1, 2, 3 ou 4.");
+                break;
+            }
+        }
+                //FUNÇÕES
+
+            function adicionarEquipamento(){
+                        const nomeEquipamento = prompt("Nome do Equipamento");
+                        const qtdEquipamento = parseInt(prompt("Quantidade")); //quantidade a ser adicionada ao estoque
+                        //3) A opção "Adicionar Equipamento" deve solicitar ao usuário o nome do equipamento e a quantidade a ser adicionada ao estoque.                         
+                        
+                        // Verifica se o nome é nulo/vazio OU se a quantidade não é um número válido
+                        if(!nomeEquipamento || isNaN(qtdEquipamento)){
+                            alert("Dados inválidos! Tente novamente!.")
+                            return;
+                        }
+
+                        //Variável para comparação
+                        const nomeUpper = nomeEquipamento.toUpperCase(); 
+
+                        // Verifica se já existe um equipamento com o mesmo nome (ignorando maiúsculas/minúsculas)
+                        const equipamentoExistente = estoque.find(item => item.nome.toUpperCase() === nomeUpper); 
+
+                        if(equipamentoExistente){
+                            //estoque.push(equipamento); //O método push() adiciona elementos no final de um array.
+                            equipamentoExistente.qtdEquipamento+=equipamento; 
+                            alert("Equipamento já Existente! e qtd atualizada");
+                            return;                            
+                        }
+                    
+                        const equipamento = {//Aqui cria um objeto
+                            nome: nomeEquipamento,
+                            quantidade: qtdEquipamento
+                        };
+                        estoque.push(equipamento); //O método push() adiciona elementos no final de um array. 
+                        alert("Equipamento adicionado ao estoque");
+                    }
+
+                    function venderEquipamento(){
+                
+                //4) A opção "Vender Equipamento" deve solicitar ao usuário o nome do equipamento a ser vendido e a quantidade a ser vendida. O programa deve procurar o equipamento no array, verificar se há a quantidade desejada disponível no estoque e atualizar a quantidade disponível.
+                const nomeVenda = prompt("Nome do equipamento a ser vendido: ");       
+                const qtdVenda = parseInt(prompt("Quantidade a ser vendida: "));      
+                const item = estoque.find(e => e.nome === nomeVenda); 
+                //Aqui o find procura no array estoque por um objeto onde a propriedade nome seja igual ao valor da variável nomeVenda.
+
+             //Aqui verifica se o objeto item foi encontrado e se a quantidade do objeto é maior ou igual ao valor de qtdVenda,
+                if(item && item.quantidade >= qtdVenda){
+                     //Aqui atualiza o estoque ao realizar uma venda, 
+                     // diminuindo a quantidade disponível do equipamento vendido.
+                     item.quantidade -= qtdVenda;
+                        alert("Venda realizada com sucesso")
+                }else{
+                    alert("Equipamento não encontrado ou estoque insuficiente!");
+                }
+        }
+
+                function ExibirEstoque(){
+
+                    if(estoque.length === 0){//Verifica se o tamanho do estoque é estritamente igual a 0
+                        alert("Estoque vazio")
+                    }
+                    else{
+                        let listaEstoque = "Estoque: \n\n";
+
+                        //Para cada item, adiciona ao texto da variável listaEstoque 
+                        // o nome e a quantidade do item formatados como "nome: quantidade unidades".
+                        //Ele gera uma lista com os itens do estoque e a apresenta ao usuário! 
+                        estoque.forEach((item) => {
+                            listaEstoque += `${item.nome}: ${item.quantidade} unidades\n`;
+                        });
+                        alert(listaEstoque)
+                        }
+                    }
+        </script>
+        
+</body>
+</html>
+
+<!--
+
+[DESAFIO LÓGICA - ] Controle de Estoque de Equipamentos
+
+Descrição: Crie um programa em JavaScript que simule um sistema de controle de estoque de equipamentos. O programa deve permitir ao usuário realizar as seguintes ações: adicionar um novo equipamento, vender um equipamento e exibir o estoque atual.
+
+Regras:
+
+1) O programa deve iniciar com um array vazio para armazenar os equipamentos.
+
+2) O programa deve exibir um menu para o usuário com as opções: adicionar equipamento, vender equipamento e exibir estoque.
+
+3) A opção "Adicionar Equipamento" deve solicitar ao usuário o nome do equipamento e a quantidade a ser adicionada ao estoque. O equipamento deve ser representado por um objeto com as propriedades "nome" e "quantidade". O objeto deve ser adicionado ao array de equipamentos.
+
+4) A opção "Vender Equipamento" deve solicitar ao usuário o nome do equipamento a ser vendido e a quantidade a ser vendida. O programa deve procurar o equipamento no array, verificar se há a quantidade desejada disponível no estoque e atualizar a quantidade disponível.
+
+5) A opção "Exibir Estoque" deve percorrer o array de equipamentos e exibir o nome e a quantidade de cada equipamento.
+
+6) O programa deve continuar em execução até que o usuário escolha a opção de sair.
+
+Exemplo de saída:
+
+Menu:
+
+1) Adicionar Equipamento
+
+4) Vender Equipamento
+
+3) Exibir Estoque
+
+4) Sair
+
+Opção: 1
+
+Nome do equipamento: Notebook
+Quantidade: 5
+
+Equipamento adicionado ao estoque.
+
+Menu:
+
+Adicionar Equipamento
+
+Vender Equipamento
+
+Exibir Estoque
+
+Sair
+
+Opção: 1
+
+Nome do equipamento: Mouse
+Quantidade: 10
+
+Equipamento adicionado ao estoque.
+
+Menu:
+
+1) Adicionar Equipamento
+
+2) Vender Equipamento
+
+3) Exibir Estoque
+
+4) Sair
+
+Opção: 2
+
+Nome do equipamento: Notebook
+Quantidade: 2
+
+Equipamento vendido com sucesso.
+
+Menu:
+
+1) Adicionar Equipamento
+
+2) Vender Equipamento
+
+3) Exibir Estoque
+
+4) Sair
+
+
+Opção: 3
+
+Estoque:
+
+Notebook: 3
+
+Mouse: 10
+
+Menu:
+
+1) Adicionar Equipamento
+
+2) Vender Equipamento
+
+3) Exibir Estoque
+
+4) Sair
+
+Opção: 4
+
+Programa encerrado.
+
+Dica: Utilize a função prompt para receber a entrada do usuário e a função console.log para exibir as mensagens e resultados.
+
+-->
