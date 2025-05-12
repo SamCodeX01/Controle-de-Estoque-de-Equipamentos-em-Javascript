@@ -95,9 +95,22 @@
 
                         const equipamentoDuplicado = estoque.find(e => e.nome === nomeEquipamento); 
 
-                        if(nomeEquipamento === equipamentoDuplicado){
+                        if(equipamentoDuplicado){
                             //const adicionandoEquip = qtdEquipamento+quantidade;
-                            alert("Equipamento duplicado, digite outro equipamento");
+                            //                 equipamento.quantidade + qtdEquipamento;
+                            alert("Equipamento duplicado!");
+                            const pergunta = prompt("Deseja adicionar esse equipamento ao estoque?\nDigite Sim ou Não: ").toUpperCase;
+                                if(pergunta == "SIM"){
+
+                            // switch(pergunta){
+                            //     case "1":
+                            //             if(pergunta == "SIM"){
+                            //                 equipamento.quantidade + qtdEquipamento;
+                            //             }
+                            //         break; 
+                            //     case "2": 
+                            //         break; 
+                            // }
                         }
 
                         /*
